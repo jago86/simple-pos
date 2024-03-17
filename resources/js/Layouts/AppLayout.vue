@@ -76,7 +76,7 @@ const showToasts = () => {
                                 </NavLink>
 
                                 <div class="inline-flex items-center border-b-2" :class="{
-                                    'border-indigo-400': route().current('pos.create'),
+                                    'border-indigo-400': route().current('pos.create') || route().current('sales.index') || route().current('sales.edit'),
                                 }">
                                     <Dropdown align="right" width="48">
                                         <template #trigger>
