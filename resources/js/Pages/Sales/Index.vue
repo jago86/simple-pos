@@ -18,6 +18,7 @@
                         <table class="table-default">
                             <thead>
                                 <tr>
+                                    <th class="">Id</th>
                                     <th class="text-left">Fecha</th>
                                     <th class="text-left">Cliente</th>
                                     <th class="text-left">Total</th>
@@ -27,6 +28,7 @@
                             <tbody>
                                 <TransitionGroup name="list">
                                     <tr v-for="sale in sales.data" :key="sale.id">
+                                        <td class="text-center">{{ sale.id }}</td>
                                         <td>{{ DateTime.fromISO(sale.created_at).toLocaleString(DateTime.DATETIME_MED)
                                             }}</td>
                                         <td>{{ sale.client.name }}</td>
@@ -46,6 +48,9 @@
                             </tbody>
                         </table>
 
+                        <Paginator :rows="50" :totalRecords="sales.total"
+                            @update:first="(page) => router.get(route('sales.index'), { page: page }, { preserveState: true })">
+                        </Paginator>
                     </div>
 
                 </div>
@@ -62,8 +67,9 @@ import Dinero from 'dinero.js';
 import { DateTime } from "luxon";
 import { router } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import DangerButton from '@/Components/DangerButton.vue';
+import Paginator from 'primevue/paginator';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 defineProps({
     sales: Object,
