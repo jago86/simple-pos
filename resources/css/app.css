@@ -1,0 +1,58 @@
+@layer tailwind-base, primevue, tailwind-utilities;
+
+@layer tailwind-base {
+    @tailwind base;
+}
+
+@layer tailwind-utilities {
+    @tailwind components;
+    @tailwind utilities;
+}
+
+[x-cloak] {
+    display: none;
+}
+
+/* TABLES */
+.table-default {
+    @apply table-auto w-full;
+}
+
+.table-default thead {
+    @apply text-xs font-semibold uppercase text-slate-500 bg-slate-50 border-t border-b border-slate-200;
+}
+
+.table-default th {
+    @apply font-semibold px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap;
+}
+
+.table-default tbody {
+    @apply text-sm divide-y divide-slate-200;
+}
+
+.table-default td {
+    @apply px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap;
+}
+
+/* END TABLES */
+
+/* VUE TRANSITIONS */
+/* LIST */
+.list-move,
+.list-enter-active,
+.list-leave-active {
+    transition: all 0.3s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+}
+
+.list-leave-active {
+    position: absolute;
+}
+/* END LIST */
+/* END VUE TRANSITIONS */
+
