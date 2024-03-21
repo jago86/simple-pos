@@ -17,16 +17,25 @@ class ProductSeeder extends Seeder
             'name' => 'Apronax',
             'price' => 50,
             'stock' => 100,
+            'category_id' => 1,
         ]);
         Product::create([
             'name' => 'Buprex Migra',
             'price' => 51,
             'stock' => 100,
+            'category_id' => 1,
         ]);
         Product::create([
             'name' => 'Umbral 1G',
             'price' => 48,
             'stock' => 100,
+            'category_id' => 1,
+        ]);
+        Product::create([
+            'name' => 'Base 108',
+            'price' => 1200,
+            'stock' => 100,
+            'category_id' => 2,
         ]);
     }
 }

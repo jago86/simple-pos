@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             'personal_team' => true,
         ]));
 
+        $this->call(CategorySeeder::class);
         $this->call(ProductSeeder::class);
         $this->call(ClientSeeder::class);
     }

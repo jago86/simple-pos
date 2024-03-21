@@ -79,12 +79,13 @@ import InputIcon from '@/Components/InputIcon.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { ReceiptPercentIcon, TrashIcon } from "@heroicons/vue/16/solid";
 import SecondaryButton from '@/Components/SecondaryButton.vue';
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, provide, ref } from 'vue';
 import axios from 'axios';
 import _ from 'lodash';
 import { useForm } from '@inertiajs/vue3';
 import Dinero from 'dinero.js';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import emitter from 'tiny-emitter/instance';
 
 const productQuery = ref('');
 const clientQuery = ref('');
@@ -171,6 +172,10 @@ const searchClients = _.debounce(() => {
         });
 }, 300);
 
+
+emitter.on('add-sale-item-event', function (product) {
+    addSaleItem(product);
+});
 const addSaleItem = (product) => {
     let saleItem = saleForm.items.find(item => item.product.id == product.id);
 
@@ -203,8 +208,13 @@ const save = () => {
             discount_percentage: item.discountPercentage,
         }))
     }))[saveMethod.value](saveRoute.value, {
-        onSuccess: () => resetSale(),
+        onSuccess: () => saleCompleted(),
     })
+};
+
+const saleCompleted = () => {
+    emitter.emit('sale-completed-event');
+    resetSale();
 };
 
 const resetSale = () => {

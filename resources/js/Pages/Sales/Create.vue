@@ -8,16 +8,29 @@
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <div class="px-8 py-10">
-                        <h1 class="text-2xl font-medium mb-2">
-                            Nueva venta
-                        </h1>
+            <div class="container mx-auto sm:px-6 lg:px-8">
+                <div class="flex gap-x-4">
+                    <div class="w-2/3 bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                        <div class="px-8 py-10">
+                            <h1 class="text-2xl font-medium mb-2">
+                                Nueva venta
+                            </h1>
 
-                        <Sale></Sale>
+                            <Sale></Sale>
+                        </div>
+
                     </div>
 
+                    <div class="w-1/3 bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                        <div class="px-8 py-10">
+                            <h1 class="text-2xl font-medium mb-2">
+                                Productos
+                            </h1>
+
+                            <ByCategoriesProducts :categories="categories"></ByCategoriesProducts>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -26,6 +39,11 @@
 </template>
 
 <script setup>
+import ByCategoriesProducts from '@/Pages/Sales/ByCategoriesProducts.vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Sale from '@/Pages/Sales/Sale.vue';
+
+defineProps({
+    categories: Array,
+});
 </script>
