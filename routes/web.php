@@ -61,3 +61,5 @@ Route::middleware([
     Route::delete('sales/{sale}', [SalesController::class, 'destroy'])
         ->name('sales.delete');
 });
+
+Route::redirect('register', 'login', 301);
