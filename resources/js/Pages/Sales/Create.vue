@@ -9,8 +9,8 @@
 
         <div class="py-12">
             <div class="container mx-auto sm:px-6 lg:px-8">
-                <div class="flex gap-x-4">
-                    <div class="w-2/3 bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="flex flex-col-reverse lg:flex-row gap-x-4 gap-y-4">
+                    <div class="w-full lg:w-2/3 bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         <div class="px-8 py-10">
                             <h1 class="text-2xl font-medium mb-2">
                                 Nueva venta
@@ -21,7 +21,7 @@
 
                     </div>
 
-                    <div class="w-1/3 bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                    <div class="w-full lg:w-1/3 bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         <div class="px-8 py-10">
                             <h1 class="text-2xl font-medium mb-2">
                                 Productos

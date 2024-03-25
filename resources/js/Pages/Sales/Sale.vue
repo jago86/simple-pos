@@ -19,47 +19,49 @@
             </div>
         </div>
 
-        <table class="table-default">
-            <thead>
-                <tr>
-                    <th>Descripción</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
-                    <th>Descuento</th>
-                    <th>Total</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <TransitionGroup name="list">
-                    <tr v-for="(item, index) in saleForm.items" :key="index">
-                        <td class="">{{ item.product.name }}</td>
-                        <td class="w-20">
-                            <TextInput class="w-20 text-center" v-model="item.quantity" @keydown="allowOnlyInteger"
-                                @change="handleQuantityChange(item)"></TextInput>
-                            <div v-if="saleForm.errors[`items.${index}.quantity`]" class="text-sm text-rose-500">{{
-                                saleForm.errors[`items.${index}.quantity`] }}</div>
-                        </td>
-                        <td class="text-center">{{ item.price.toFormat('$0.00') }}</td>
-                        <td class="w-20">
-                            <InputIcon class="w-20" v-model="item.discountPercentage" @keydown="allowOnlyInteger"
-                                type="text" placeholder="Descuento">
-                                <ReceiptPercentIcon class="w-6 h-6"></ReceiptPercentIcon>
-                            </InputIcon>
-                            <div v-if="saleForm.errors[`items.${index}.discount_percentage`]"
-                                class="w-20 text-sm text-rose-500">{{
-                                saleForm.errors[`items.${index}.discount_percentage`] }}</div>
-                        </td>
-                        <td class="text-center">{{ item.total().toFormat('$0.00') }}</td>
-                        <td>
-                            <SecondaryButton @click="removeItem(item)">
-                                <TrashIcon class="h-4 w-4"></TrashIcon>
-                            </SecondaryButton>
-                        </td>
+        <div class="overflow-scroll w-full lg:border-blue-400 lg:border lg:border-r-4">
+            <table class="table-default">
+                <thead>
+                    <tr>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Descuento</th>
+                        <th>Total</th>
+                        <th></th>
                     </tr>
-                </TransitionGroup>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <TransitionGroup name="list">
+                        <tr v-for="(item, index) in saleForm.items" :key="index">
+                            <td class="">{{ item.product.name }}</td>
+                            <td class="w-20">
+                                <TextInput class="w-20 text-center" v-model="item.quantity" @keydown="allowOnlyInteger"
+                                    @change="handleQuantityChange(item)"></TextInput>
+                                <div v-if="saleForm.errors[`items.${index}.quantity`]" class="text-sm text-rose-500">{{
+                                    saleForm.errors[`items.${index}.quantity`] }}</div>
+                            </td>
+                            <td class="text-center">{{ item.price.toFormat('$0.00') }}</td>
+                            <td class="w-20">
+                                <InputIcon class="w-20" v-model="item.discountPercentage" @keydown="allowOnlyInteger"
+                                    type="text" placeholder="Descuento">
+                                    <ReceiptPercentIcon class="w-6 h-6"></ReceiptPercentIcon>
+                                </InputIcon>
+                                <div v-if="saleForm.errors[`items.${index}.discount_percentage`]"
+                                    class="w-20 text-sm text-rose-500">{{
+                                    saleForm.errors[`items.${index}.discount_percentage`] }}</div>
+                            </td>
+                            <td class="text-center">{{ item.total().toFormat('$0.00') }}</td>
+                            <td>
+                                <SecondaryButton @click="removeItem(item)">
+                                    <TrashIcon class="h-4 w-4"></TrashIcon>
+                                </SecondaryButton>
+                            </td>
+                        </tr>
+                    </TransitionGroup>
+                </tbody>
+            </table>
+        </div>
         <div>Subtotal: {{ saleForm.subtotal().toFormat('$0.00') }}</div>
         <div>Iva: {{ saleForm.tax().toFormat('$0.00') }}</div>
         <div>Total: {{ saleForm.total().toFormat('$0.00') }}</div>

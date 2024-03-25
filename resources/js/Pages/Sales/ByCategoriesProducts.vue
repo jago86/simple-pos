@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        <div class="mt-5 grid grid-cols-3 gap-1">
+        <div class="mt-5 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-1">
             <button v-for="product in products" :key="product.id" @click="emitter.emit('add-sale-item-event', product)"
                 class="p-5 bg-gray-300 hover:bg-gray-400 text-sm text-center border rounded transition">
                 <div>{{ product.name }}</div>

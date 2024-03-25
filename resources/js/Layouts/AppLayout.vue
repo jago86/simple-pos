@@ -299,8 +299,24 @@ const showToasts = () => {
                                 </ResponsiveNavLink>
                             </form>
 
+
+                            <div class="border-t border-gray-200" />
+
+                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                Ventas
+                            </div>
+
+                            <!-- Team Settings -->
+                            <ResponsiveNavLink :href="route('sales.index')" :active="route().current('sales.index') ">
+                                Ver
+                            </ResponsiveNavLink>
+
+                            <ResponsiveNavLink :href="route('pos.create')" :active="route().current('pos.create')" >
+                                POS
+                            </ResponsiveNavLink>
+
                             <!-- Team Management -->
-                            <template v-if="$page.props.jetstream.hasTeamFeatures">
+                            <template v-if=" $page.props.jetstream.hasTeamFeatures">
                                 <div class="border-t border-gray-200" />
 
                                 <div class="block px-4 py-2 text-xs text-gray-400">
@@ -343,7 +359,7 @@ const showToasts = () => {
                                         </form>
                                     </template>
                                 </template>
-                            </template>
+</template>
                         </div>
                     </div>
                 </div>
