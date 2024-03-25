@@ -56,7 +56,7 @@ const showToasts = () => {
 
         <Toast />
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-gray-100 bg-[url('/images/bg-dark2.png')]">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -311,7 +311,7 @@ const showToasts = () => {
                                 Ver
                             </ResponsiveNavLink>
 
-                            <ResponsiveNavLink :href="route('pos.create')" :active="route().current('pos.create')" >
+                            <ResponsiveNavLink :href="route('pos.create')" :active="route().current('pos.create')">
                                 POS
                             </ResponsiveNavLink>
 
@@ -359,7 +359,7 @@ const showToasts = () => {
                                         </form>
                                     </template>
                                 </template>
-</template>
+                            </template>
                         </div>
                     </div>
                 </div>
