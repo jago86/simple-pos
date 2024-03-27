@@ -89,6 +89,7 @@ import { useForm } from '@inertiajs/vue3';
 import Dinero from 'dinero.js';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import emitter from 'tiny-emitter/instance';
+import { allowOnlyInteger } from '@/Composables/useKeyValidation.js';
 
 const productQuery = ref('');
 const clientQuery = ref('');
@@ -176,18 +177,18 @@ const searchClients = _.debounce(() => {
 }, 300);
 
 
-emitter.on('add-sale-item-event', function (product) {
-    addSaleItem(product);
+emitter.on('add-sale-item-event', function (item) {
+    addSaleItem(item.product, item.quantity);
 });
-const addSaleItem = (product) => {
+const addSaleItem = (product, quantity = 1) => {
     let saleItem = saleForm.items.find(item => item.product.id == product.id);
 
     if (saleItem) {
-        saleItem.add();
+        saleItem.add(quantity);
         return;
     }
 
-    saleForm.items.push(new SaleItem(product, 1, product.price));
+    saleForm.items.push(new SaleItem(product, quantity, product.price));
 };
 
 const handleQuantityChange = (item) => {
@@ -241,8 +242,8 @@ class SaleItem {
         this.price = Dinero({ amount: price });
     }
 
-    add() {
-        this.quantity++;
+    add(quantity = 1) {
+        this.quantity = this.quantity + quantity;
     }
 
     total() {
@@ -250,21 +251,5 @@ class SaleItem {
         return this.price.multiply(this.quantity).subtract(discount);
     }
 };
-
-const allowOnlyInteger = (event) => {
-    // Permite teclas de navegación sin restricciones
-    const allowedKeys = ['ArrowLeft', 'ArrowRight', 'Tab', 'Backspace', 'Delete'];
-    if (allowedKeys.includes(event.key)) return;
-
-    // Crea una copia del valor actual del input, incluyendo el nuevo carácter
-    const proposedValue = event.target.value + event.key;
-    // Verifica si el valor propuesto es un número decimal válido
-    const isInteger = /^-?\d*$/.test(proposedValue);
-
-    if (!isInteger) {
-        // Previene la adición del carácter si el resultado no es un número decimal
-        event.preventDefault();
-    }
-}
 
 </script>
