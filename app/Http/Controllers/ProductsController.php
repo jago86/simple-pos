@@ -9,7 +9,7 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        if (!request()->filled('name') and !request()->filled('category_id') and !request()->wantsJson()) {
+        if (!request()->filled('name') and !request()->filled('category_id') and !request()->filled('tag') and !request()->wantsJson()) {
             return [];
         }
 
