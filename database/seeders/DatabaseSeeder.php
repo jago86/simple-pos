@@ -26,6 +26,17 @@ class DatabaseSeeder extends Seeder
             'personal_team' => true,
         ]));
 
+        $user = \App\Models\User::factory()->create([
+            'name' => 'Cristhian Álvarez',
+            'email' => 'cristhianmi@hotmail.es',
+            'password' => bcrypt(12345678),
+        ]);
+        $user->ownedTeams()->save(Team::forceCreate([
+            'user_id' => $user->id,
+            'name' => explode(' ', $user->name, 2)[0] . "'s Team",
+            'personal_team' => true,
+        ]));
+
         $this->call(CategorySeeder::class);
         $this->call(ProductSeeder::class);
         $this->call(ClientSeeder::class);
