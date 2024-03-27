@@ -14,6 +14,7 @@ class ProductsController extends Controller
         }
 
         $products = Product::when(request()->filled('category_id'), fn ($q) => $q->where('category_id', request('category_id')))
+            ->when(request()->filled('tag'), fn ($q) => $q->where('tag', request('tag')))
             ->when(request()->filled('name'), fn ($q) => $q->where('name', 'LIKE', '%'.request('name').'%'))
             ->get();
 

@@ -27,7 +27,7 @@
                                 Productos
                             </h1>
 
-                            <ByCategoriesProducts :categories="categories"></ByCategoriesProducts>
+                            <ByCategoriesProducts :categories="categories" :tags="tags"></ByCategoriesProducts>
                         </div>
 
                     </div>
@@ -45,5 +45,6 @@ import Sale from '@/Pages/Sales/Sale.vue';
 
 defineProps({
     categories: Array,
+    tags: Array,
 });
 </script>

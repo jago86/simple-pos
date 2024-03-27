@@ -19,7 +19,8 @@
             </div>
         </div>
 
-        <div class="overflow-scroll w-full lg:border-blue-400 lg:border lg:border-r-4">
+        <div
+            class="overflow-scroll w-full border-blue-400 border border-r-4 md:border-0">
             <table class="table-default">
                 <thead>
                     <tr>

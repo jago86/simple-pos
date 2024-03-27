@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('stock')->default(0);
             $table->integer('price');
             $table->foreignId('category_id');
+            $table->string('tag')->nullable();
             $table->timestamps();
 
             $table->foreign('category_id')

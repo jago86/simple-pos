@@ -1,10 +1,16 @@
 <template>
     <div>
-        <InputLabel>Línea</InputLabel>
+
         <div class="flex items-center gap-x-2">
             <div>
+                <InputLabel>Línea</InputLabel>
                 <Dropdown v-model="selectedCategory" :options="categoriesPool" option-label="name"
                     @update:model-value="getProducts"></Dropdown>
+            </div>
+            <div>
+                <InputLabel>Grupo</InputLabel>
+                <Dropdown v-model="selectedTag" :options="tagsPool" showClear
+                    @update:model-value="getProducts" placeholder="Todos"></Dropdown>
             </div>
             <div>
                 <ProgressSpinner v-show="loading" class="h-6 w-6" strokeWidth="8"></ProgressSpinner>
@@ -31,12 +37,15 @@ import ProgressSpinner from 'primevue/progressspinner';
 
 const props = defineProps({
     categories: Array,
+    tags: Array,
 });
 
 const loading = ref(false);
 const nullCategory = { name: '--Todas--', id: null };
 const selectedCategory = ref(nullCategory);
+const selectedTag = ref(null);
 const categoriesPool = computed(() => [nullCategory].concat(props.categories));
+const tagsPool = computed(() => props.tags);
 const products = ref([]);
 
 onMounted(() => {
@@ -49,7 +58,7 @@ emitter.on('sale-completed-event', function (product) {
 
 const getProducts = () => {
     loading.value = true;
-    axios.get(route('products.index', { category_id: selectedCategory.value.id }))
+    axios.get(route('products.index', { category_id: selectedCategory.value.id, tag: selectedTag.value }))
         .then(response => {
             products.value = response.data;
             loading.value = false;

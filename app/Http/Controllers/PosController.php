@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\SaleDetail;
 use Illuminate\Http\Request;
 use App\Http\Requests\SaleRequest;
+use Illuminate\Support\Facades\DB;
 use App\Providers\App\Events\SaleCreated;
 
 class PosController extends Controller
@@ -19,6 +20,7 @@ class PosController extends Controller
         return Inertia::render('Sales/Create', [
             // 'clients' => Client::select('id', 'name', 'document_number')->get(),
             'categories' => Category::all(),
+            'tags' => DB::table('products')->distinct()->pluck('tag'),
         ]);
     }
 
