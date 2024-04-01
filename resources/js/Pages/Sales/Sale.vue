@@ -44,7 +44,7 @@
                             </td>
                             <td class="text-center">{{ item.price.toFormat('$0.00') }}</td>
                             <td class="w-20">
-                                <InputIcon class="w-20" v-model="item.discountPercentage" @keydown="allowOnlyInteger"
+                                <InputIcon class="w-20" v-model.number="item.discountPercentage" @keydown="allowOnlyInteger"
                                     type="text" placeholder="Descuento">
                                     <ReceiptPercentIcon class="w-6 h-6"></ReceiptPercentIcon>
                                 </InputIcon>
@@ -82,7 +82,7 @@ import InputIcon from '@/Components/InputIcon.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { ReceiptPercentIcon, TrashIcon } from "@heroicons/vue/16/solid";
 import SecondaryButton from '@/Components/SecondaryButton.vue';
-import { computed, onMounted, provide, ref } from 'vue';
+import { computed, onMounted, provide, ref, watch } from 'vue';
 import axios from 'axios';
 import _ from 'lodash';
 import { useForm } from '@inertiajs/vue3';
@@ -233,6 +233,14 @@ const removeItem = (itemToRemove) => {
         saleForm.items.splice(index, 1);
     }
 };
+
+watch(() => saleForm.items, (newItemsValues) => {
+    newItemsValues.forEach(item => {
+        if (item.discountPercentage === '') {
+            item.discountPercentage = 0
+        }
+    })
+}, {deep: true})
 
 class SaleItem {
     discountPercentage = 0;
