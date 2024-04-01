@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Enums\TaxId;
 use App\Models\Sale;
 use Inertia\Inertia;
+use App\Models\Category;
 use App\Models\SaleDetail;
 use Illuminate\Http\Request;
 use App\Http\Requests\SaleRequest;
+use Illuminate\Support\Facades\DB;
 
 class SalesController extends Controller
 {
@@ -22,6 +24,8 @@ class SalesController extends Controller
     {
         return Inertia::render('Sales/Edit', [
             'sale' => $sale->load(['client', 'details.product']),
+            'categories' => Category::all(),
+            'tags' => DB::table('products')->distinct()->pluck('tag'),
         ]);
     }
 

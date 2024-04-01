@@ -37,7 +37,7 @@
                         <tr v-for="(item, index) in saleForm.items" :key="index">
                             <td class="">{{ item.product.name }}</td>
                             <td class="w-20">
-                                <TextInput class="w-20 text-center" v-model="item.quantity" @keydown="allowOnlyInteger"
+                                <TextInput class="w-20 text-center" type ="number" v-model="item.quantity" @keydown="allowOnlyInteger"
                                     @change="handleQuantityChange(item)"></TextInput>
                                 <div v-if="saleForm.errors[`items.${index}.quantity`]" class="text-sm text-rose-500">{{
                                     saleForm.errors[`items.${index}.quantity`] }}</div>
@@ -45,7 +45,7 @@
                             <td class="text-center">{{ item.price.toFormat('$0.00') }}</td>
                             <td class="w-20">
                                 <InputIcon class="w-20" v-model.number="item.discountPercentage" @keydown="allowOnlyInteger"
-                                    type="text" placeholder="Descuento">
+                                    type="number" min="0" placeholder="Descuento">
                                     <ReceiptPercentIcon class="w-6 h-6"></ReceiptPercentIcon>
                                 </InputIcon>
                                 <div v-if="saleForm.errors[`items.${index}.discount_percentage`]"
@@ -192,7 +192,7 @@ const addSaleItem = (product, quantity = 1) => {
 };
 
 const handleQuantityChange = (item) => {
-    if (item.quantity < 0) {
+    if (item.quantity <= 0) {
         removeItem(item);
     }
 };
